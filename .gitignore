@@ -1,0 +1,18 @@
+ 
+# Ignore the virtual environment directory
+venv/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore environment variables file
+.env
+
+# Ignore other common files
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
