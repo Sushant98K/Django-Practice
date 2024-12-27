@@ -76,3 +76,13 @@ def updateHotels(request):
 def editHotels(request, id):
         data=Hotel.objects.get(hotelId=id)
         return render(request, 'hotelapp/update_form.html', {'hotel': data})
+
+def deleteHotels(request, id):
+    hotel = Hotel.objects.get(hotelId=id)
+    
+    if request.method == 'POST':
+        # If the user confirms the deletion
+        hotel.delete()
+        return HttpResponse("<h1>Success: Hotel Deleted!</h1>")
+    
+    return render(request, 'hotelapp/confirm_delete.html', {'hotel': hotel})
