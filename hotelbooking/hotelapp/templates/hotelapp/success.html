@@ -13,7 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 class="text-center"> New hotel Added Successfully</h1>
+    <h1 class="text-center"> {{ success_message }}</h1>
     <div class="container">
             <table class="table mt-5 table-bordered">
                 <tr>
@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                     <th><label for="">hotel Image</label></th>
-                    <td>{{hotel.hotel_image}}</td>
+                    <td><img src="{{ hotel.hotel_image.url }}" alt="{{ hotel.hotelName }}" style="width: 100px; height: auto;"></td>
                 </tr>
             </table>
     </div>

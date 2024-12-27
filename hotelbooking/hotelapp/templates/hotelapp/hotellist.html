@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 class="text-center"> Hotel Details</h1>
-    <div class="container mt-5">
+    <div class="container mt-5 ">
         <table class="table border">
             <thead class="thead-dark">
                 <tr>
@@ -20,6 +20,7 @@
                 <th scope="col">Address</th>
                 <th scope="col">Contact</th>
                 <th scope="col">Image</th>
+                <th class="text-center" scope="col" colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,8 @@
                             <p>No image available</p>
                         {% endif %}
                     </td>
+                    <td><a href="edit/{{ hotel.hotelId }}" class="btn btn-primary">Update</a></td>
+                    <td><a href="delete/{{ hotel.hotelId }}" class="btn btn-danger">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
