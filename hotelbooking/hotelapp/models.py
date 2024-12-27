@@ -9,6 +9,7 @@ class Hotel(models.Model):
     hotelType = models.CharField(max_length=100)
     rating = models.IntegerField()
     contact = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
     hotel_image = models.ImageField(null=True, blank=True, upload_to='hotels/')
 
 class Category(models.Model):
