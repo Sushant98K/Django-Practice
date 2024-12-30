@@ -7,4 +7,8 @@ urlpatterns = [
     path('updatehotel/', updateHotels, name='updatehotel'),
     path('show/edit/<int:id>', editHotels, name='edit'),
     path('show/delete/<int:id>', deleteHotels, name='delete'),
+    path('show/category/<int:hotelId>', addCategory, name='addcategory'),
+    path('show/clist/<int:hotelId>', cList, name='clist'),
+    path('show/category/edit/<int:id>/', editCategory, name='editcategory'),
+    path('show/category/delete/<int:id>/', deleteCategory, name='deletecategory'),
 ]

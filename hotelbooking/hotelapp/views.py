@@ -86,3 +86,55 @@ def deleteHotels(request, id):
         return HttpResponse("<h1>Success: Hotel Deleted!</h1>")
     
     return render(request, 'hotelapp/confirm_delete.html', {'hotel': hotel})
+
+def addCategory(request, hotelId):
+    if request.method != 'POST':
+        data = Hotel.objects.get(hotelId=hotelId)
+        return render(request, 'hotelapp/AddCategory.html', {'hotel_1': data})
+    else:
+        hotel = Hotel.objects.get(hotelId=hotelId)
+        room_No=request.POST['room_No']
+        roomType=request.POST['roomType']
+        price_per_room=request.POST['price_per_room']
+        available_rooms=request.POST['available_rooms']
+        data_c=Category(hotel=hotel,room_No=room_No,roomType=roomType,price_per_room=price_per_room,available_rooms=available_rooms)
+        data_c.save()
+        return HttpResponse("<h1>success.......</h1>")
+
+def cList(request, hotelId):
+    hotel = Hotel.objects.get(hotelId=hotelId)
+    cat_data = Category.objects.filter(hotel=hotel)
+    return render(request, 'hotelapp/CategoryList.html', {'hotel_1': hotel, 'cat_data': cat_data})
+
+def editCategory(request, id):
+    # Retrieve the category instance by ID
+    category = Category.objects.get(id=id)
+    
+    if request.method == 'POST':
+        # Update the category fields with the submitted data
+        category.room_No = request.POST['room_No']
+        category.roomType = request.POST['roomType']
+        category.price_per_room = request.POST['price_per_room']
+        category.available_rooms = request.POST['available_rooms']
+        
+        # Save the updated category
+        category.save()
+        
+        return HttpResponse("<h1>Success: Category Updated!</h1>")
+    
+    # Render the edit form with the current category data
+    return render(request, 'hotelapp/editCategory.html', {'category': category})
+
+# In hotelapp/views.py
+
+def deleteCategory(request, id):
+    # Retrieve the category instance by ID
+    category = Category.objects.get(id=id)
+    
+    if request.method == 'POST':
+        # If the user confirms the deletion
+        category.delete()
+        return HttpResponse("<h1>Success: Category Deleted!</h1>")
+    
+    # Render the confirmation template
+    return render(request, 'hotelapp/confirm_delete_category.html', {'category': category})
