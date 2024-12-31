@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>name</th>
+            <th>Age</th>
+            <th>email</th>
+        </thead>
+        <tbody>
+            
+            {% for i in data %}
+            <tr>                
+                <td>{{i.name}}</td>
+                <td>{{i.age}}</td>
+                <td>{{i.email}}</td>
+            </tr>                
+            {% endfor %}                
+        </tbody>
+    </table>
+</body>
+</html>
