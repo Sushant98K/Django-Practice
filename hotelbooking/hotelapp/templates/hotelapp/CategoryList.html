@@ -18,7 +18,7 @@
                     <th scope="col">Room Type</th>
                     <th scope="col">Price Per Room</th>
                     <th scope="col">Available Room's</th>
-                    <th class="text-center" scope="col" colspan="2">Action</th>
+                    <th class="text-center" scope="col" colspan="3">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +30,7 @@
                     <td>{{i.roomType}}</td>
                     <td>{{i.price_per_room}}</td>
                     <td>{{i.available_rooms}}</td>
+                    <td><a href="{% url 'booking' i.id %}" class="btn btn-success">Booking</a></td>
                     <td><a href="{% url 'editcategory' i.id %}" class="btn btn-primary">Update</a></td>
                     <td><a href="{% url 'deletecategory' i.id %}" class="btn btn-danger">Delete</a></td>
                 </tr>                    
