@@ -11,3 +11,5 @@ class Demodata(models.Model):
     #shows object titel in admin panel 
     def __str__(self):
         return self.name
+    
+    #after creating admin model you can comment this __str__ method
