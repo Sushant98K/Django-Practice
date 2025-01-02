@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.hashers import make_password, check_password 
 from django.http import HttpResponse
 from .models import User
 from django.shortcuts import redirect
@@ -7,7 +8,7 @@ def addUser(request):
     if request.method=='POST':
         email = request.POST['email']
         username = request.POST['username']
-        password = request.POST['password']
+        password = make_password(request.POST['password'])  #apply make password to encrypt the password
         contactNo = request.POST['contactNo']
         govId = request.POST['govId']
         address = request.POST['address']

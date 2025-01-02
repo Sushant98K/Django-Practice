@@ -46,6 +46,7 @@ EXTERNAL_APPS = [
     'hotelapp',
     'userapp',
     'bookingapp',
+    'loginapp',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
