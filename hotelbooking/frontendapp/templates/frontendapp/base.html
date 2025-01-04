@@ -83,22 +83,47 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="{% url 'home' %}" class="nav-item nav-link {% if current_page == 'home' %}active{% endif %}">Home</a>
-                    <a href="{% url 'about' %}" class="nav-item nav-link {% if current_page == 'about' %}active{% endif %}">About</a>
+                    <a href="{% url 'showhotel' %}" class="nav-item nav-link {% if current_page == 'hotellist' %}active{% endif %}">Hotels</a>
                     <a href="{% url 'service' %}" class="nav-item nav-link {% if current_page == 'service' %}active{% endif %}">Services</a>
                     <a href="{% url 'package' %}" class="nav-item nav-link {% if current_page == 'package' %}active{% endif %}">Packages</a>
                     <div class="nav-item dropdown">
+                        {% if request.session.custemail is None and request.session.adminemail is None %}
                         <a href="#" class="nav-link dropdown-toggle {% if current_page in 'destination,booking,team,testimonial,404' %}active{% endif %}" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
+                        <div class="dropdown-menu m-0">                          
+                                                       
                             <a href="{% url 'destination' %}" class="dropdown-item {% if current_page == 'destination' %}active{% endif %}">Destination</a>
                             <a href="{% url 'booking' %}" class="dropdown-item {% if current_page == 'booking' %}active{% endif %}">Booking</a>
                             <a href="{% url 'team' %}" class="dropdown-item {% if current_page == 'team' %}active{% endif %}">Travel Guides</a>
                             <a href="{% url 'testimonial' %}" class="dropdown-item {% if current_page == 'testimonial' %}active{% endif %}">Testimonial</a>
-                            <a href="{% url 'error' %}" class="dropdown-item {% if current_page == 'error' %}active{% endif %}">404 Page</a>
+                            <a href="{% url 'error' %}" class="dropdown-item {% if current_page == 'error' %}active{% endif %}">404 Page</a>                               
+                            
                         </div>
+                        {% endif %}                            
+                        {% if request.session.custemail is None and request.session.adminemail is not None %}
+                        <a href="#" class="nav-link dropdown-toggle {% if current_page in 'adduser, showuser, testimonial, 404' %}active{% endif %}" data-bs-toggle="dropdown">Admin</a>
+                        <div class="dropdown-menu m-0">                          
+                                                       
+                            <a href="{% url 'adduser' %}" class="dropdown-item {% if current_page == 'adduser' %}active{% endif %}">Add User</a>
+                            <a href="{% url 'showuser' %}" class="dropdown-item {% if current_page == 'showuser' %}active{% endif %}">User List</a>
+                            <a href="{% url 'testimonial' %}" class="dropdown-item {% if current_page == 'testimonial' %}active{% endif %}">All Bookings</a>
+                            <a href="{% url 'error' %}" class="dropdown-item {% if current_page == 'error' %}active{% endif %}">404 Page</a>                               
+                            
+                        </div>
+                        {% endif %}                            
                     </div>
-                    <a href="{% url 'contact' %}" class="nav-item nav-link {% if current_page == 'contact' %}active{% endif %}">Contact</a>
+                    {% comment %} Any new nav bar content {% endcomment %}
                 </div>
-                <a href="" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                {% if request.session.custemail is None and request.session.adminemail is None %}
+                
+                <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4">Log In</a>
+
+                {% endif %}
+
+                {% if request.session.custemail is not None or request.session.adminemail is not None %}
+                
+                {% include 'frontendapp/components/avatar.html' %}
+                
+                {% endif %}
             </div>
         </nav>
 

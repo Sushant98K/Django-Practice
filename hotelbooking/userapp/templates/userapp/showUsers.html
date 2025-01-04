@@ -34,7 +34,7 @@
                 <tr>
                     <th scope="row">{{user.email}}</td>
                     <td>{{user.username}}</td>
-                    <td>{{user.password}}</td>
+                    <td>{{user.password|truncatechars:10}}</td>
                     <td>{{user.contactNo}}</td>
                     <td>{{user.govId}}</td>
                     <td>{{user.address}}</td>

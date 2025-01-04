@@ -27,8 +27,10 @@
                     <th scope="col">Address</th>
                     <th scope="col">Contact</th>
                     <th scope="col">Image</th>
-                    <th class="text-center" scope="col" colspan="2">Category</th>
+                    <th class="text-center" scope="col">Category</th>
+                    {% if request.session.custemail is None and request.session.adminemail is not None %}
                     <th class="text-center" scope="col" colspan="2">Action</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -49,10 +51,11 @@
                             <p>No image available</p>
                         {% endif %}
                     </td>
-                    <td><a href="category/{{ hotel.hotelId}}" class="btn btn-success">Add New</a></td>
                     <td><a href="clist/{{ hotel.hotelId}}" class="btn btn-info">Details</a></td>
+                    {% if request.session.custemail is None and request.session.adminemail is not None %}
                     <td><a href="edit/{{ hotel.hotelId }}" class="btn btn-primary">Update</a></td>
                     <td><a href="delete/{{ hotel.hotelId }}" class="btn btn-danger">Delete</a></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

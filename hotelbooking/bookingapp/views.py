@@ -9,7 +9,7 @@ def addBooking(request, id):
         cat_data = Category.objects.get(id=id)
         
         # Retrieve the user instance (assuming the user is logged in)
-        email="a@gmail.com"
+        email= request.session['custemail']
         user = User.objects.get(email=email)  # Adjust this based on your authentication logic
         
         # Retrieve form data
@@ -39,7 +39,7 @@ def addBooking(request, id):
 
 def bookingList(request):
     # Retrieve all bookings for the logged-in user
-    email="a@gmail.com"
+    email= request.session['custemail']
     user = User.objects.get(email=email)  # Adjust this based on your authentication logic
     bookings = Booking.objects.filter(user=user)
     return render(request, 'bookingapp/BookingList.html', {'bookings': bookings})

@@ -19,6 +19,11 @@
 
     <div class="container">
         <h2 class="text-center my-5">Category List</h2>
+        {% if request.session.adminemail is not None %}
+        <div class="d-flex justify-content-end mb-5">
+            <a href="{% url 'addcategory' hotel_1.hotelId %}" class="btn btn-success">Add New Category</a>
+        </div>
+        {% endif %}
         <table class="table border">
             <thead class="thead-dark">
                 <tr>
@@ -27,7 +32,14 @@
                     <th scope="col">Room Type</th>
                     <th scope="col">Price Per Room</th>
                     <th scope="col">Available Room's</th>
+                    {% if request.session.custemail is None and request.session.adminemail is None %}
+                    {% endif %}
+                    {% if request.session.custemail is not None and request.session.adminemail is None %}
+                    <th scope="col">Action</th>
+                    {% endif %}
+                    {% if request.session.custemail is None and request.session.adminemail is not None %}
                     <th class="text-center" scope="col" colspan="3">Action</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -39,14 +51,18 @@
                     <td>{{i.roomType}}</td>
                     <td>{{i.price_per_room}}</td>
                     <td>{{i.available_rooms}}</td>
+                    {% if request.session.custemail is not None and request.session.adminemail is None %}
+                    <td><a href="{% url 'booking' i.id %}" class="btn btn-success">Booking</a></td>
+                    {% endif %}
+                    {% if request.session.custemail is None and request.session.adminemail is not None %}
                     <td><a href="{% url 'booking' i.id %}" class="btn btn-success">Booking</a></td>
                     <td><a href="{% url 'editcategory' i.id %}" class="btn btn-primary">Update</a></td>
                     <td><a href="{% url 'deletecategory' i.id %}" class="btn btn-danger">Delete</a></td>
+                    {% endif %}
                 </tr>                    
                 {% endfor %}                                    
             </tbody>
         </table>
-        <a href="{% url 'addcategory' hotel_1.hotelId %}" class="btn btn-success">Add New Category</a>
     </div>
 
 <!--Category List end-->
