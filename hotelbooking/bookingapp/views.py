@@ -55,3 +55,30 @@ def deleteBooking(request, id):
     
     # Render a confirmation template (optional)
     return render(request, 'bookingapp/confirm_delete_booking.html', {'booking': booking})
+
+def checkout(request):
+    
+    user = User.objects.get(email=request.session['custemail'])
+    booking_data = Booking.objects.filter(user = user)
+    total = sum(item.total_price for item in booking_data)
+    gst = total * 0.05
+    sum_total = total + (total * 0.05) 
+    
+    if request.method == 'POST':
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        subtotal = sum_total
+        
+        new_booking = Order(
+            fname = fname,
+            lname = lname,
+            email = email,
+            phone = phone,
+            subtotal = subtotal, 
+        )
+        new_booking.save()
+        pass
+    else:
+        return render(request, 'bookingapp/checkout.html',locals())
