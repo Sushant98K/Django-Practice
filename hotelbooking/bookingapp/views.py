@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.conf import settings
+from datetime import datetime
 from hotelapp.models import *
 from userapp.models import *
 from .models import *
@@ -61,24 +63,37 @@ def checkout(request):
     user = User.objects.get(email=request.session['custemail'])
     booking_data = Booking.objects.filter(user = user)
     total = sum(item.total_price for item in booking_data)
-    gst = total * 0.05
-    sum_total = total + (total * 0.05) 
+    tax = total * 0.15
+    sum_total = total + tax
+     
     
     if request.method == 'POST':
         fname = request.POST['fname']
         lname = request.POST['lname']
         email = request.POST['email']
         phone = request.POST['phone']
+        status = 'started..'
         subtotal = sum_total
+        razorpay_key = settings.RAZORPAY_KEY_ID
         
         new_booking = Order(
             fname = fname,
             lname = lname,
             email = email,
             phone = phone,
+            status = status,
             subtotal = subtotal, 
         )
-        new_booking.save()
-        pass
+        # new_booking.save()
+        
+        current_date = datetime.now().strftime("%Y%m%d")
+        new_booking.orderId = f"{current_date}{new_booking.id}"
+        # new_booking.save()
+        
+        return render(request, 'bookingapp/payment.html', locals())
     else:
-        return render(request, 'bookingapp/checkout.html',locals())
+        return render(request, 'bookingapp/checkout.html', locals())
+    
+
+def payment(request):
+    return render(request, 'bookingapp/payment.html', locals())

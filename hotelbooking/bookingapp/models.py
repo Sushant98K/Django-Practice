@@ -18,4 +18,5 @@ class Order(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=100)
     subtotal = models.FloatField(default=0.0)
-    
+    status = models.CharField(max_length=50)
+    orderId = models.CharField(max_length=50)
